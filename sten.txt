@@ -1,0 +1,1640 @@
+ranslation to English:
+
+Vagrantfile
+Vagrant:
+$ cat /vagrant/Vagrantfile
+...
+apt install emacs-nox
+
+$ apt search . | wc –l
+190508
+By executing the $ apt search . | wc -l command, you can calculate the total number of available packages in your system's package manager. Here, it shows there are 190,508 available packages.
+
+$ apt search maria
+Executing $ apt search maria lists all packages related to "maria," including MariaDB's server, client, documentation, etc.
+
+Example: Searching for packages
+Search for packages containing a specific string
+
+Suppose you want to search for all packages containing "nginx," you can use:
+
+$ apt search nginx
+This command will list all packages containing the "nginx" string, including names and brief descriptions.
+Searching with detailed and description options
+
+If you want more detailed search results, you can add the -v option:
+$ apt search -v nginx
+
+If you only want to see the description of each package, you can use the -d option:
+$ apt search -d nginx
+
+Example: Getting package information
+Get detailed information about a specific package
+To view detailed information about the "nginx" package, you can use:
+$ apt info nginx
+This will display detailed information about the nginx package, including version, maintainer, size, dependencies, etc.
+View all available versions
+
+To view all available versions of a package, you can use the -a option:
+$ apt info -a nginx
+
+To list detailed information about "nginx," including whether it is installed, you can use:
+$ apt list nginx
+List detailed information
+
+For more detailed information, you can use the -I option:
+$ apt list -I nginx
+
+Example: Getting command help
+View help for a specific APT command
+If you need to learn more about the options and usage of the search command, you can use:
+$ apt search --help
+
+update and upgrade
+
+$ sudo apt update
+Download the new list of packages, but don't install anything yet.
+
+$ sudo apt upgrade
+Upgrade all installed packages to the latest version.
+
+$ sudo apt install git vim
+This command performs the following actions:
+
+Elevate privileges: sudo allows the command to run with superuser privileges, which is usually required for installing packages.
+
+Install packages: apt install is the command to install one or more packages.
+
+Specify packages: git and vim are the names of the packages to be installed.
+
+Shell Expansion
+Wildcard *
+matches all files and directory names in the current directory. For example, cat * will make the cat command read all files in the current directory.
+Patterns starting with a specific character a*
+This pattern matches all filenames in the current directory that start with 'a'.
+Single character wildcard ?
+
+? matches any single character. For example, image???.jpg matches all filenames like image001.jpg, where ??? can be any three characters.
+Character set [ab]
+
+This pattern matches any single character from the specified set of characters. For example, image[0-9].jpg matches image0.jpg, image1.jpg, etc.
+Variable expansion $
+
+$ is used for variable expansion. For example, $HOME will be expanded to the user's home directory path.
+Shell Quoting
+Double quotes "double quotes"
+
+Double quotes are used to turn off pattern matching while still allowing variable interpolation and backslash escaping. For example, in "a*", * is not treated as a wildcard.
+Single quotes 'single quotes'
+
+Single quotes turn off all expansions, including pattern matching and variable expansion. For example, 'a*' is treated as the literal string a*.
+Backslash escaping *, ?, [, $
+
+Backslash is used to escape special characters, making them lose their special meaning and be seen as ordinary characters. For example, * represents a literal asterisk, not a wildcard.
+
+cp command examples
+cp is used to copy files or directories.
+Copying one or more files to a directory
+
+$ cp index.html style.css web
+This command copies index.html and style.css to a directory named web.
+Copying multiple files using wildcards
+
+$ cp * web
+This will copy all files in the current directory to the web directory.
+If the current directory is empty, using the wildcard * will result in the error message "cp: can't stat '*': No such file or directory" because no files match the wildcard.
+mv command examples
+mv is used to move files or directories and can also be used to rename files or directories.
+
+Moving a file
+
+Suppose there are a file document.txt and a directory folder, the command $ mv document.txt folder will move document.txt into the folder directory.
+Renaming a file
+
+$ mv oldname.txt newname.txt will rename the file oldname.txt to newname.txt.
+find command examples
+find is used to search for files in a directory tree.
+
+Search for files by name
+
+$ find . -name "a*"
+This command searches for all files starting with 'a' in the current directory (where . represents the current directory) and its subdirectories.
+Search and perform an action
+
+$ find /path/to/dir -name "*.txt" -exec cp {} /path/to/destination/ ;
+This command searches for all files ending with .txt in the /path/to/dir directory and its subdirectories, and copies them to the /path/to/destination/ directory.
+
+Of course, let me provide you with a practical example regarding standard input/output. Suppose we have a file called textfile.txt, and we want to view its contents and then copy some of it to another file. This can be achieved using cat, grep, and redirection operations.
+
+Example steps:
+Viewing file content
+
+First, we can use the cat command to view the content of the textfile.txt file:
+shell
+Copy code
+$ cat textfile.txt
+This command outputs the contents of textfile.txt to standard output (usually the terminal).
+Searching for specific content and redirecting to a new file
+
+Next, suppose we want to find all lines containing the word "example" and save these lines to a new file filtered.txt. We can use the grep command in combination with a pipe and redirection to achieve this:
+shell
+Copy code
+$ cat textfile.txt | grep "example" > filtered.txt
+Here, the output of the cat command (i.e., the contents of textfile.txt) is used as input for the grep command. grep searches for lines containing "example," and then these lines are redirected to the file filtered.txt.
+
+In Unix and Unix-like systems, the vertical bar | is a pipe symbol. It is used to pass the output of one command as input to another command. With pipes, you can link multiple commands together, creating powerful command sequences. Each command reads the output from the previous command, processes it, and then outputs the result to the next command.
+
+cat textfile.txt | grep "example" > filtered.txt
+The cat textfile.txt command reads the content of the textfile.txt file and outputs it to standard output.
+
+The pipe symbol | takes this output and uses it as input for the grep "example" command. The grep command then searches for all lines containing "example."
+
+Finally, the lines found by grep are written to the filtered.txt file through another redirection operation >.
+
+Enhancing search with options
+Display line numbers of matching lines (-n)
+
+$ grep -n "example" file.txt
+This command searches for "example" in file.txt and displays the line number for each matching line.
+Ignore case (-i)
+
+$ grep -i "Example" file.txt
+This command searches for "Example" (case-insensitive), so "example", "Example", "eXample", etc., will all match.
+Recursively search files in a directory (-r)
+
+$ grep -r "example" /path/to/directory
+This command recursively searches for "example" in all files within the specified directory and its subdirectories.
+Using multiple options simultaneously
+
+grep -c "pattern" filename
+Counts the number of lines in a file that match "pattern".
+
+$ grep -o "pattern" filename
+Only displays the text parts that match "pattern", not the entire line.
+
+$ grep -v "pattern" filename
+Displays lines that do not contain "pattern".
+
+$ grep -f patterns.txt filename
+Searches filename using patterns from the patterns.txt file.
+
+$ grep -nHi "example" file1.txt file2.txt
+This command searches for "example" in file1.txt and file2.txt, displaying matching lines with their line numbers (-n), ignoring case (-i), and hiding the filename (-H) when searching multiple files.
+
+grep's -w option
+The -w option makes grep match only whole words, not parts of strings. To construct a file that meets your criteria:
+
+File content (for example, example.txt):
+
+hello
+hellothere
+Command and results:
+Using grep without the -w option: grep "hello" example.txt will match both lines: “hello” and “hellothere”.
+Using grep with the -w option: grep -w "hello" example.txt will only match the word “hello”.
+
+Difference between grep -c and wc -l
+grep -c counts the number of matching lines, whereas grep PATTERN FILE | wc -l counts the number of output lines. When a line contains multiple matches, these two methods will produce different results.
+Construct file (for example, example.txt):
+
+hello hello
+world
+Commands and results:
+grep "hello" example.txt | wc -l will output 1, because only one line contains matches.
+grep -c "hello" example.txt will also output 1, for the same reason that only one line contains matches.
+In this case, both methods give the same result. However, if you use a command that returns matches themselves rather than whole lines (such as grep -o), then wc -l will count the number of matches, while grep -c still only counts the number of lines containing matches.
+
+Matching words with different spellings
+To match different British and American spellings, you can use regular expressions to handle spelling differences.
+"encyclopaedia" and "encyclopedia"
+
+Regular expression: encyclopaedia|encyclopedia
+Or more succinctly: encyclop(a)edia (the a is optional).
+"color" and "colour"
+
+Regular expression: color|colour
+Or more succinctly: colou?r (the u is optional).
+
+Using Regular Expressions
+$ grep "^example" file.txt
+This command searches for lines in file.txt that start with "example" (^ is a regular expression symbol that represents the beginning of a line).
+
+Search for lines containing a tab
+
+$ grep $'\t' filename
+This command searches for all lines in filename that contain a tab. Here $'\t' is a Bash special syntax for representing a tab.
+Search for lines containing a space
+
+$ grep ' ' filename
+This command searches for all lines in filename that contain a space. Here, a space is used directly within the quotes.
+Search for lines containing a tab or space
+
+$ grep -E '\t| ' filename
+This command uses extended regular expressions (-E) to search for all lines in filename that contain a tab or a space. | denotes an "or" relationship.
+Search for lines containing multiple spaces or tabs
+
+$ grep -E '[ \t]+' filename
+Uses regular expression brackets and a plus sign (+) to match one or more spaces or tabs.
+
+Key features of regular expressions:
+Universality: Almost all programming languages and many text editors support regular expressions.
+
+Flexibility and Power: Can be used to perform complex text matching, finding, and replacement operations.
+
+Pattern Matching: Allows precise description of the structure and content of the string you want to match.
+
+Common regular expression symbols and their meanings:
+.: Matches any single character (except newline).
+^: Matches the start of the string.
+$: Matches the end of the string.
+*: Matches the preceding subexpression zero or more times.
++: Matches the preceding subexpression one or more times.
+?: Matches the preceding subexpression zero or one time.
+[ ]: Character set. Matches any one of the contained characters.
+{ }: Quantifier. Specifies the number of times the preceding element occurs.
+( ): Grouping. Treats several items as a single unit for processing, usually used for extracting information or specifying the order of operations.
+: Escape character. Used to match those special characters, like ., *, ?, etc.
+|: Choice. Matches the subexpression to the left or right of the symbol.
+
+Matching Specific Text
+Match the text "hello"
+Regular expression: hello
+Description: Exactly matches the string "hello".
+Using Dot (.) to Match Any Character
+Match any single character followed by "at"
+Regular expression: .at
+For example: Matches "cat", "bat", "hat".
+Using Asterisk () to Match Zero or More Times
+Match "bo" followed by any number of "o"s
+Regular expression: bo
+For example: Matches "bo", "boo", "booo", etc.
+Using Plus (+) to Match One or More Times
+Match "ho" followed by at least one "o"
+Regular expression: ho+
+For example: Matches "hoo", "hooo", but not "ho".
+Using Question Mark (?) to Match Zero or One Time
+Match "colou?r"
+Regular expression: colou?r
+Description: Matches "color" and "colour".
+Using Square Brackets to Define a Set of Characters
+Match any vowel letter
+Regular expression: [aeiou]
+Description: Matches any one of the vowel letters "a", "e", "i", "o", "u".
+Using Caret (^) Inside Square Brackets to Negate
+Match any non-digit character
+Regular expression: [^0-9]
+Description: Matches any single character that is not a digit.
+Using Curly Braces to Specify Number of Repetitions
+Match three digits
+Regular expression: \d{3}
+Description: Matches any three consecutive digit characters.
+Using Parentheses for Grouping
+Match phone number format
+Regular expression: (\d{3})-(\d{3})-(\d{4})
+For example: Matches "123-456-7890".
+Using Pipe (|) for "Or" Operation
+Match "cat" or "dog"
+Regular expression: cat|dog
+Description: Matches "cat" or "dog".
+Certainly, I can provide some specific regular expression examples to demonstrate their use. Regular expressions are commonly used for text search, validation, and replacement operations. Here are some common scenarios and their corresponding regular expression examples:
+
+Validating Email Addresses
+Regular expression: ^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,}$
+Meaning: This expression matches standard email addresses. It requires the email address to start with letters, digits, or specific symbols (., _, %, +, -), followed by an @ symbol, then a domain name, and finally a dot (.) followed by two or more letters for the top-level domain.
+
+Matching Web Page URLs
+Regular expression: ^(http|https)://[a-zA-Z0-9.-]+.[a-zA-Z]{2,}(/.*)?$
+Meaning: This expression is used to match web page URLs starting with http or https. It accepts standard web addresses and allows for optional paths and query strings.
+
+Finding or Replacing Phone Numbers
+Regular expression: \b\d{3}[-.]?\d{3}[-.]?\d{4}\b
+Meaning: This expression matches phone numbers in formats like 123-456-7890 or 123.456.7890, or even 1234567890. \d represents a digit, {3} indicates it repeats three times, [-.]? represents an optional separator (dash or dot).
+
+Matching Date Formats
+Regular expression: ^\d{4}-\d{2}-\d{2}$
+Meaning: Matches date formats like 2021-03-15. Here \d{4} represents a four-digit year, \d{2} represents a two-digit month and day.
+
+Extracting Text Inside Tags
+Regular expression: <tag>(.?)</tag>
+Meaning: In simple cases, this expression can match any content between <tag> and </tag>. Here .? represents a non-greedy match of any characters until the next </tag>.
+
+Searching or Validating IP Addresses
+Regular expression: ^([0-9]{1,3}.){3}[0-9]{1,3}$
+Meaning: This expression is used to match standard IPv4 addresses like 192.168.1.1. Each number can be one to three digits.
+
+Redirection is a fundamental concept in Unix and Unix-like systems (such as Linux), allowing users to send the output of a command to a place other than the default (such as another file, program, or printer) or to receive input from a place other than the default. In the command line, redirection is widely used to control data flow, making it more flexible and powerful.
+
+Types and purposes of redirection:
+Standard Output Redirection (> and >>)
+
+: Writes the output of a command to a file, overwriting it if it already exists.
+For example: ls > files.txt saves the output of the ls command to the files.txt file.
+
+: Appends the output of a command to a file, rather than overwriting it.
+For example: echo "hello" >> greeting.txt appends the text "hello" to the end of the greeting.txt file.
+Standard Input Redirection (<)
+
+<: Reads input from a file instead of the keyboard.
+For example: sort < unsorted.txt reads data from the unsorted.txt file and sorts it.
+
+Error Output Redirection (2>)
+Redirects error messages to a specific file or device.
+For example: grep "text" file.txt 2> errors.txt writes errors generated during the search to errors.txt.
+
+Combining Output and Error Output Redirection (&> or > and 2>&1)
+Redirects both standard output and error output to the same place.
+For example: command &> output.txt or command > output.txt 2>&1 redirects both standard and error output to the output.txt file.
+
+$ cat infile | sort > outfile
+cat infile: This command reads the content of the infile file and outputs it to standard output.
+
+| (pipe): The pipe symbol takes the output of the cat command as input for the sort command.
+
+sort: The sort command sorts the data it receives (from cat).
+
+(redirection): Then, the sorted output is redirected to the outfile file. If outfile does not exist, it will be created; if it exists, its original content will be overwritten by the sorted result.
+
+$ sort < infile > outfile
+< infile: Here, input redirection is used. The < symbol takes the content of the infile file directly as input to the sort command, eliminating the need for the cat command as an intermediary step.
+
+sort: The sort command reads its standard input (from the infile file) and sorts it.
+
+outfile: The sorted output is similarly redirected to the outfile file.
+
+Example 1: Redirecting standard output and error output separately
+$ ./example.sh > output.txt 2> error.txt
+This command executes the script example.sh.
+
+output.txt redirects all standard output to the output.txt file. If the file already exists, it will be overwritten.
+2> error.txt redirects all error output to the error.txt file. Similarly, if the file already exists, it will be overwritten.
+
+Example 2: Redirecting standard output and error output to the same file
+$ ./example.sh > output.txt 2>&1
+This command also executes the script example.sh.
+
+output.txt redirects all standard output to the output.txt.
+2>&1 redirects all error output to the current location of standard output, which is the output.txt file.
+
+Example 3: Incorrect usage - Incorrectly redirecting standard and error output
+$ ./example.sh 2>&1 > output.txt
+This command's intent might be to redirect both standard and error output to output.txt, but it doesn't work as intended.
+2>&1 first redirects error output to the current standard output (which at this point is still the terminal), then > output.txt only redirects standard output to the file, leaving error output to appear in the terminal.
+
+Example 4: Ignoring all output
+$ ./example.sh > /dev/null 2>&1
+This command executes example.sh but ignores all output.
+
+/dev/null redirects standard output to /dev/null, meaning standard output is discarded.
+2>&1 redirects error output to the current location of standard output, which is /dev/null
+
+It's generally considered bad practice to start filenames with a dash (-), as it can cause confusion in command-line parsing, especially with commands that accept options (which often start with a dash). If you encounter filenames that start with a dash (e.g., accidentally creating such a file), you need to use some special methods to handle them.
+
+How to Deal with Filenames That Start with a Dash
+Using the ./ Prefix
+
+Adding the ./ prefix before the filename prevents the command from mistaking the filename as an option. ./ represents the current directory, so this effectively provides the file's relative path.
+For example, if there's a file named -file.txt, you can use cat ./-file.txt to view its content.
+Using the -- Flag
+
+Many Unix commands support the -- flag, which is used to indicate the end of command-line options. Everything following -- is treated as an argument, not an option.
+For example, rm -- -file.txt tells the rm command that -file.txt is a filename to be deleted, not a parameter with options.
+Why Avoid Filenames Starting with a Dash
+Command-line parsing conflict: Filenames starting with a dash may conflict with command-line parameters, as dashes are commonly used to denote options or switches.
+Usability issues: Such filenames can make file operations complex because you'll need to use additional tricks each time to correctly reference the file.
+Example
+Viewing File Content
+
+shell
+Copy code
+$ cat ./-file.txt
+Using ./ to specify the -file.txt file in the current directory.
+
+Deleting a File
+
+shell
+Copy code
+$ rm -- -file.txt
+Using -- to clearly indicate that -file.txt is a filename.
+
+By using these methods, you can safely handle filenames that start with a dash, avoiding confusion and potential errors in command-line parsing.
+
+tee Command
+
+$ ls | tee filelist.txt
+This command lists the content of the current directory, while also saving the same output to the filelist.txt file.
+
+$ ls | tee -a filelist.txt
+If using the -a option (append mode), tee appends the output to the end of the filelist.txt file, instead of overwriting it.
+
+less Command
+less is a widely used paging program that allows you to view long texts in a paginated manner. Compared to the earlier more command, less offers more features and flexibility, such as forward and backward scrolling.
+
+Basic Usage
+
+$ COMMAND | less
+This command passes the output of COMMAND through a pipe to less, allowing you to view the output page by page.
+Control Keys
+Up/down arrow keys: Scroll up or down one line.
+Space key/Enter key: Scroll down one whole page.
+/ (forward slash): Opens the search function, enter the search term, and press Enter to search.
+q: Quit less.
+
+Example
+Viewing a Long File List
+$ ls -l | less
+This command lists the detailed file list of the current directory and allows you to browse these contents page by page or line by line in less.
+
+Viewing File Content
+$ less filename.txt
+Directly use less to paginate the content of the filename.txt file.
+The less command is particularly useful when viewing large log files, long text outputs, or any content that goes beyond a single screen display. Its browsing and searching functionalities allow users to easily locate parts of interest.
+
+sed
+$ echo "Hello World" | sed –e 's/World/Universe/'
+Hello Universe
+sed stands for stream editor – it can change text using a regular expression as it passes from input to output.
+s/ONE/TWO/[g] replaces the first match for ONE (all matches, with /g) with TWO. Regular expressions are supported.
+
+sed (stream editor) is a very powerful text processing tool in Unix and Unix-like systems. It is used for processing and transforming text read from an input stream (such as a file or the output of another command). sed primarily relies on regular expressions to perform various complex text operations.
+
+Basic Usage
+s/ONE/TWO/[g] is one of the most common command forms in sed, used for text replacement:
+
+s: Represents the substitute operation.
+ONE: The text to be replaced (original text).
+TWO: The new text for replacement.
+g: An optional flag, indicating global replacement (i.e., replacing all matches in a line). If g is omitted, only the first match in each line is replaced.
+Example
+
+Text Replacement
+$ echo "Hello World" | sed 's/World/Universe/'
+This command uses sed to replace "World" in "Hello World" with "Universe", resulting in "Hello Universe".
+
+Global Replacement
+$ echo "cat, bat, sat, mat" | sed 's/at/oon/g'
+This command replaces all "at" with "oon", resulting in "coon, boon, soon, moon".
+
+Deleting Lines
+$ sed '/pattern/d' filename
+This command deletes all lines containing "pattern" from the filename file.
+
+Inserting and Modifying
+$ sed '3i\New line' filename
+Inserts "New line" before the third line in the filename file.
+
+potato@DESKTOP-B54PRV0:$ echo "Hello World" | sed 's/World/Universe/'
+Hello Universe
+potato@DESKTOP-B54PRV0:$ echo "Hello World" | sed -e 's/World/Universe/'
+Hello Universe
+
+Process Substitution
+
+The situation you mentioned involves an advanced shell feature called process substitution. Process substitution allows you to pass the result of a process (or the output of a command) as a file to another program. This is very useful when you need to provide data as a file rather than directly as standard input.
+
+Basic Syntax of Process Substitution
+ruby
+Copy code
+$ PROGRAM <(COMMAND)
+<(COMMAND) creates a temporary named pipe (or a similar mechanism), and the output of COMMAND is written into this pipe. To PROGRAM, it appears as a normal file.
+Example
+Providing Command Output as a File to a Program
+
+shell
+Copy code
+$ cat <(echo "Hi")
+This command executes echo "Hi" and passes its output as a temporary file to the cat command. cat reads the content of this temporary file and prints it to standard output, so the final output is "Hi".
+Viewing the Temporary Filename Generated by Process Substitution
+
+shell
+Copy code
+$ echo <(echo "Hi")
+This command doesn't print "Hi" directly but prints the name of the temporary file (or file descriptor) used for process substitution, like /dev/fd/63. This is because the echo command here is only printing the path to the temporary file, not reading its content.
+Combining Outputs of Multiple Commands into One File
+
+shell
+Copy code
+$ cat <(echo "First part") <(echo "Second part")
+This command creates two temporary files, one containing the text "First part" and the other containing "Second part". Then the cat command reads the contents of these two files in turn and combines them into standard output.
+
+In Unix and Unix-like systems, a subshell is an independent shell process created by the parent shell. Subshells inherit the environment of the parent shell (such as variables and the current directory), but any changes made within the subshell (like changing the current directory or modifying environment variables) do not affect the parent shell.
+
+In the command line, subshells can be used to execute a series of commands without disturbing the current shell environment. It is often used for command substitution and process substitution.
+
+Command Substitution
+Command substitution allows you to use the output of one command as an argument to another command. There are two common ways to do command substitution: $(...) and backticks ``.
+
+$(...) Syntax
+
+This is the recommended syntax for command substitution. It's more readable, can be nested, and is clearer syntactically.
+
+$ echo $(date)
+This command executes the date command and uses its output as an argument to the echo command.
+Backticks `` Syntax
+
+This is the older syntax for command substitution but can still be seen in some old shell scripts.
+$ echo date
+Also executes the date command and uses its output as an argument to the echo command.
+
+Using sed to Process Another Command's Output
+$ echo $(echo "Hi" | sed 's/Hi/Hello/')
+This command first executes echo "Hi", then passes its output through a pipe to the sed command for processing. sed 's/Hi/Hello/' replaces "Hi" with "Hello", and finally, the echo command prints the processed result "Hello".
+
+Nested Command Substitution
+$ echo $(echo $(echo "Hi"))
+In this command, the innermost echo "Hi" is executed first, then its output becomes the argument for the outer echo command, resulting in "Hi" being printed.
+
+Command substitution is a very useful feature, allowing you to directly use one command's output as another command's input, thus creating complex command chains.
+
+In Unix and Unix-like systems, file permissions are represented by a set of characters, typically in the format -rw-r--r--. This set of characters details the access rights different types of users have to a file. Here is a detailed explanation of this format and the meanings of different combinations of permissions:
+
+Explanation of Permission Format
+The first character: Indicates the file type.
+
+represents a regular file.
+d represents a directory.
+Other characters represent special types of files, like l (symbolic link).
+The next nine characters: Divided into three groups of three characters each, representing the permissions for three different types of users on the file.
+The first group (characters 2-4): The permissions for the file owner.
+The second group (characters 5-7): The permissions for users in the same group.
+The third group (characters 8-10): The permissions for other users.
+Meaning of Each Group of Permissions
+r: Read permission.
+w: Write permission.
+x: Execute permission.
+-: Indicates the respective permission is not set.
+Common Combinations of Permissions
+-rw-r--r-- (as provided in your example)
+
+Owner: Read and write (rw-).
+Group members: Read-only (r--).
+Other users: Read-only (r--).
+-rwx------
+
+Owner: Read, write, and execute (rwx).
+Group members: No permissions (---).
+Other users: No permissions (---).
+-rwxr-xr-x
+
+Owner: Read, write, and execute (rwx).
+Group members: Read and execute (r-x).
+Other users: Read and execute (r-x).
+drwxrwxrwx
+
+File type: Directory (d).
+Owner: Read, write, and execute (rwx).
+Group members: Read, write, and execute (rwx).
+Other users: Read, write, and execute (rwx).
+These combinations of permissions are crucial for securing files and directories. They allow system administrators to precisely control who can view, modify, or execute specific files. It's especially important to set file permissions correctly when dealing with sensitive data or system files.
+
+In Unix and Unix-like systems, you can use the chmod (change mode) command to change the permissions of files or directories, thus setting access rights for different users and group members. The chmod command can specify permissions in two ways: symbolic notation and octal (or numeric) notation.
+
+Symbolic Notation
+Symbolic notation uses letters and operators to define permissions. It includes the following elements:
+
+User classes: u (user/owner), g (group), o (others), a (all categories).
+Operators: + (add permissions), - (remove permissions), = (set exact permissions).
+Permissions: r (read), w (write), x (execute).
+
+Example
+Adding write permission to the group
+chmod g+w filename
+This adds write permission for the file's group.
+
+Removing all permissions for other users
+chmod o-rwx filename
+This removes read, write, and execute permissions for other users.
+
+Setting exact permissions
+chmod u=rwx,g=rx,o=r filename
+This sets the file's permissions so that the owner has read, write, and execute permissions; the group has read and execute permissions; and other users have read permission only.
+
+Octal Notation
+Octal (numeric) notation uses numbers to define permissions. Each permission type (read, write, execute) corresponds to a number: read (4), write (2), execute (1). These numbers are added together to represent combined permissions.
+
+Example
+Setting permissions to 644
+chmod 644 filename
+This is equivalent to rw-r--r--, meaning read and write for the owner, and read-only for the group and others.
+
+Setting permissions to 755
+chmod 755 filename
+This is equivalent to rwxr-xr-x, meaning read, write, and execute for the owner, and read and execute for the group and others.
+
+Considerations
+Only the file's owner or the superuser (root) can change the file's permissions.
+Be sure you understand the consequences of changing the permissions of critical system files or directories before doing so.
+
+Filesystem Hierarchy Standard, FHS
+
+Root Directory /
+The root directory is the starting point of the entire filesystem. All files and directories start from /.
+/bin
+The /bin directory contains executable binary files (programs) that are essential for system booting and running.
+/usr
+/usr stands for Unix System Resources, but it has become a generic directory for storing user-space applications and data.
+/usr/bin contains most user-level programs.
+/usr/local/bin is typically used for storing locally installed programs by the system administrator.
+/usr/lib contains library files that are used by programs in the /usr/bin directory.
+/etc
+The /etc directory contains system configuration files. These files are usually managed by the system administrator.
+/lib
+The /lib directory contains the system's dynamic libraries, similar to .dll files in Windows.
+/home
+The /home directory contains personal directories for users. Each user has a directory under /home with the same name as their username.
+/sbin
+The /sbin directory contains system management programs used by the system administrator.
+/tmp
+The /tmp directory is used for storing temporary files. The contents of this directory may be cleared upon reboot.
+/var
+The /var directory contains files that change frequently, such as log files or caches.
+/dev, /sys, /proc
+These directories contain virtual file systems used for accessing devices, system information, and running processes as files.
+/dev contains device files.
+/sys provides access to kernel and its parameters.
+/proc provides access to system processes and other system information.
+/vagrant
+The /vagrant directory is a convention in Vagrant virtual machines for sharing files between the host machine and the virtual machine.
+
+In shell scripts or command lines, sometimes you need to directly concatenate a variable's value with other text or characters. In such cases, using $VARIABLE form might lead to interpretation confusion, especially when the variable name should be followed by other characters directly. To clearly delineate the boundaries of the variable name, you can use the ${VARIABLE} syntax.
+
+Scenarios for Using ${VARIABLE}
+When the variable value needs to be directly concatenated with other text or characters without leaving space.
+Example
+Suppose there's a variable a with value "Hello", and you want to directly append the text "World" to it, forming "HelloWorld".
+
+Without Braces
+
+If you write $aWorld, the shell will look for a variable named aWorld, not a.
+With Braces
+
+The correct way is to write ${a}World. This way, the shell correctly identifies the variable a and concatenates its value with "World".
+This will output "HelloWorld", as ${a} is replaced with "Hello".
+Why Use Braces
+Using braces clearly defines the start and end of the variable name, avoiding interpretation ambiguity.
+This is very important in script writing, especially when you work in scenarios where auto-generating filenames, paths, or other precision text operations are required.
+Example Code
+bash
+Copy code
+a="Hello"
+echo "${a}World" # Outputs HelloWorld
+In this example, ${a}World explicitly means "the value of variable a, followed immediately by the text 'World'". This method ensures clear delineation between the variable name and subsequent text.
+
+Git
+
+Git is a widely used version control system for tracking and managing code history. Here are some basic Git commands:
+
+git init: Initializes a new Git repository in the current directory.
+
+git clone [url]: Clones (downloads) a remote repository to local.
+
+git add [file]: Adds a file to the staging area in preparation for committing. Using git add . adds all changes in the current directory.
+
+git commit -m "[commit message]": Commits changes in the staging area to the repository history. Each commit should come with a message describing the changes made.
+
+git status: Displays the current state of the repository, including changed, untracked, and staged files.
+
+git branch [branch-name]: Creates a new branch. Without a branch name, this command lists all branches.
+
+git checkout [branch-name]: Switches to the specified branch.
+
+git merge [branch-name]: Merges changes from the specified branch into the current branch.
+
+git pull [remote] [branch]: Pulls the latest changes from a remote repository and merges them into the local repository.
+
+git push [remote] [branch]: Pushes local repository changes to a remote repository.
+
+git log: Views the commit history.
+
+git diff: Shows unstaged changes.
+
+If you want to pull the latest changes from the master branch of a remote repository named origin, you would use:
+git pull origin master
+
+If you want to push changes from your local master branch to a remote repository named origin, you would use:
+git push origin master
+
+For example, if you want to add a remote repository named origin with the URL https://github.com/user/repo.git, you would run:
+git remote add origin https://github.com/user/repo.git
+
+Verify that the remote repository has been added
+git remote -v
+
+Run the git rm --cached command to stop tracking the example.txt file:
+git rm --cached example.txt
+This command removes the example.txt file from Git's staging area (staging area) but does not delete it from your filesystem.
+
+git status to confirm the file has been untracked
+
+Update the .gitignore file (optional). If you don't want Git to accidentally start tracking this file again in the future, you should update the .gitignore file to add example.txt to it:
+echo example.txt >> .gitignore
+This command adds example.txt to the end of the .gitignore file, telling Git to ignore it.
+
+Commit the changes. Run git add .gitignore (if you updated the .gitignore) and git commit to commit these changes:
+git add .gitignore
+git commit -m "Stop tracking example.txt and update .gitignore"
+After completing these steps, the example.txt file will no longer be tracked by Git, but will still exist in your working directory, and future changes will also not be tracked by Git.
+
+Based on the command line output you provided, you encountered a merge conflict issue. When attempting to git commit or git pull, Git indicates that there are unmerged files. This usually happens when there are different changes to the same file in two different branches or two different repositories, and when they are merged, Git cannot automatically resolve these changes, so you need to manually resolve the conflict.
+
+Here are the steps to resolve this issue:
+
+Edit the Conflicted File:
+
+Open the conflicted file (here it is hi) with a text editor (in your case, nano).
+Within the file, Git will mark the conflicted areas, usually surrounded by <<<<<<<, =======, and >>>>>>> markers. You need to decide which changes to keep, modify, or merge.
+Save and Close the File:
+
+After resolving all conflicts, save and close the file.
+Mark the Conflict as Resolved:
+
+Use the git add <file> command to mark the conflict as resolved. In your case, run git add hi.
+Complete the Merge:
+
+After resolving the conflict, you can attempt to commit again. Use git commit -m "Resolve conflict" to complete the merge process.
+Continue the Previous Operation:
+
+After resolving the conflict and successfully committing, you can attempt the previously failed operation (like git pull) again.
+
+git fetch should be followed by the name of the remote repository, not the branch name. Typically, the default remote repository name is origin. If develop is a branch name rather than a remote repository name, you should specify the correct remote repository first, then the branch name. For example:
+git fetch origin develop
+
+Compare Local and Remote Branch
+git diff master origin/master
+
+View the Latest Commit of the Remote Branch
+git log origin/master
+
+You've committed changes in a "detached HEAD" state and are trying to push these changes to a remote repository. In a detached HEAD state, you are not on any named branch, so you cannot directly push changes to a remote repository because Git doesn't know which branch they should be pushed to.
+
+To resolve this issue, you have a few options:
+
+Push to an Existing Remote Branch
+git push origin HEAD:<name-of-remote-branch>
+git push origin HEAD:develop
+
+Create a New Local Branch
+If these commits are the starting point for further development on a new branch, you can create a new branch:
+git branch new-branch-name
+
+Then switch to this new branch:
+git checkout new-branch-name
+
+Next, you can normally push this new branch to the remote repository:
+git push origin new-branch-name
+
+Checkout an Existing Branch and Merge Changes
+git checkout develop
+git merge 3c83f1a
+
+Your local develop branch and the remote develop branch have diverged. This means there are some independent commits on both branches that are not on the other branch.
+Merge Remote Branch Changes into Your Local Branch
+git pull origin develop
+
+Reset Your Local Branch to Match the Remote Branch
+If you decide to discard your local branch's changes and want your local branch to match the current state of the remote branch exactly, you can use git reset. Note that this will lose all your local branch's unpushed changes. Run:
+git reset --hard origin/develop
+This resets your local develop branch to the current state of the remote develop branch.
+
+Rebase Your Local Changes
+If you want to keep your local changes and apply them on top of the current state of the remote branch, you can use git rebase. Run:
+git rebase origin/develop
+
+Push Your Local Changes and Resolve Conflicts
+git push origin develop
+
+Discarding Changes to a File
+Discarding changes to a single file:
+If you have made changes to the file hello.c but haven't committed them, and you wish to undo these changes, you can use:
+git checkout -- hello.c
+This will restore hello.c to its state at the last commit.
+
+Reverting to a Clean Working State
+Undo all uncommitted changes:
+git reset --hard HEAD
+This command resets all tracked files to their state at the last commit.
+
+Removing all untracked files and directories:
+git clean -dfx
+This command deletes all untracked files and directories (including ignored files).
+
+Reverting to the Previous Commit
+Viewing the code state of the last commit:
+git checkout HEAD~1
+This command switches to the previous commit of the current branch, allowing you to view the code state at that time.
+
+Returning to the Main Branch to Continue Working
+Switching back to the main branch:
+git checkout main
+If you have finished viewing the old state, you can use this command to return to the main branch.
+
+Undoing the Changes of a Commit
+Undoing the changes of the most recent commit:
+git revert HEAD
+This command creates a new commit, which is the inverse operation of the HEAD commit, i.e., undoing all changes made by HEAD.
+
+Creating a Patch (From Bob's Perspective)
+Preparing the patch:
+Bob has made changes and committed them. Then, he uses the git format-patch command to create a patch file that includes the differences from the remote main branch.
+git format-patch origin/main --to=alice@bristol.ac.uk
+
+Applying the Patch (From Alice's Perspective)
+After receiving the patch, Alice can apply this patch to her codebase using the following command:
+git apply 0001-Fixes-spelling-mistake.patch
+
+Alice has received the patch file 0001-Fixes-spelling-mistake.patch sent by Bob. She can use the git am command to apply this patch:
+git am ../bob/0001-Fixes-spelling-mistake.patch
+This command applies the changes from the patch to Alice's codebase and automatically creates a new commit.
+
+Viewing the Commit History:
+After applying the patch, Alice can use git log --oneline to view the commit history. She will see a new commit, for example, 575dcde Fixes spelling mistake.
+
+Behind the Operations of git am
+What is git am:
+git am is an advanced Git command used to apply patch files generated by git format-patch. It is actually a combination of several low-level commands:
+
+First, git apply applies the changes from the patch to the staging area.
+Then, git commit creates a new commit using the commit message included in the patch.
+
+Creating a New Branch
+git branch new-feature main
+
+Switching to the New Branch
+git checkout new-feature
+
+Simplified Command
+git checkout -b new-feature main
+
+Switching Back to the Main Branch
+git checkout main
+
+Merging Branches
+git merge --no-ff another-feature new-feature main
+
+Using git format-patch to create a series of patches indeed generates a separate patch file for each commit. This approach can become cumbersome in some situations, especially when involving multiple patches that need to be applied consecutively to maintain code integrity. If your new-feature branch has a series of commits, where some commits might leave the code in a temporarily unstable or "broken" state, then sending these commits as separate patches could cause some issues.
+
+Solution
+Squashing Commits:
+Before sending changes to the maintainer, you might consider using git rebase -i (interactive rebase) to squash (squash) or reorganize commits.
+This way, you can merge a series of commits into one or a few commits with clear descriptions, making each patch represent a complete and stable change.
+
+Generating Patches:
+After completing the commit squashing, use git format-patch to create patches. This will produce clearer, more manageable patch files, each representing a stable and complete state of the codebase.
+Step Example
+Suppose you have multiple commits on the new-feature branch and want to squash them into a single commit:
+
+Start Interactive Rebase:
+git rebase -i main
+
+In the editor, select the commits to squash:
+Mark all commits except the first one as squash or s, which will merge these commits into the first one.
+
+Generate Patch Files:
+git format-patch main --stdout > new-feature.patch
+
+git cherry-pick is a very useful Git command that allows you to select specific commits from another branch and apply them to the current branch. This command is very useful in various situations, especially when you only want specific changes from a branch without the entire branch history.
+
+Scenarios for Using git cherry-pick
+Selectively Applying Changes:
+
+When you find a useful commit on another branch that you want to apply to your current branch without introducing other changes from that branch, you can use git cherry-pick.
+Fixing Mistakes:
+
+If a mistake was fixed on one branch, you might want to quickly apply this fix to other branches without waiting for the regular merge process.
+git cherry-pick 8199c8e
+This command means applying the commit with ID 8199c8e to the current branch. This commit might be the action of adding a new file d.
+
+Internal Mechanism
+Actually, git cherry-pick is somewhat similar to a simplified rebase operation. Internally, it creates a new commit, whose changes are the same as the selected original commit, but with a new commit ID.
+Many of Git's functionalities are built on these basic operations, providing a more friendly user interface to simplify complex version control tasks.
+
+shellcheck
+sudo apt-get update
+sudo apt-get install shellcheck
+
+Start the file with the shebang #! then the path to the interpreter of the script plus any arguments:
+For portable POSIX shell scripts #! /bin/sh/
+For less portable BASH scripts #! /usr/bin/env bash
+Then
+chmod +x my-script.sh
+./my-script.sh
+The rest of the file will be run by the interpreter you specified
+or sh my-script.sh if you don’t want to/can't mark it executable.
+
+#!/usr/bin/env bash
+
+This will find the bash interpreter in the PATH
+#!/usr/bin/env python3
+
+This will find the python3 interpreter in the PATH
+env
+
+env Command Overview
+Name: env is a command in Unix and Unix-like systems used for setting and printing environment variables.
+Synopsis: env [-i] [name=value ...] [utility [argument ...]] is the basic usage of this command.
+Specific Functions of env
+Execute Programs: env can execute a specified program (or utility), and it can modify the environment before execution.
+
+Modify Environment Variables:
+
+name=value: This format is used to specify environment variables, where name is the variable name, and value is the value assigned to that variable.
+Using this method, you can temporarily set or change environment variables before executing a specified program.
+Find Programs:
+
+The env command searches for the provided program name in the directories specified by the PATH environment variable.
+This means you can use env to execute a program without knowing its absolute path.
+Why Use env in Shebang
+The reason for using env in Shebang (such as #!/usr/bin/env bash) relates to its lookup functionality. By using env, scripts can find the correct interpreter (like bash, python3, etc.) across different system environments, even if the installation paths of those interpreters may differ on different systems.
+
+Example Application
+Suppose you have a script named script.sh with a Shebang of #!/usr/bin/env bash:
+
+When you run this script, env searches for bash in your PATH.
+Once bash is found, env uses the found bash interpreter to run the rest of the script.
+This makes the script more flexible and portable since it does not depend on a fixed installation path for the interpreter.
+
+path
+
+Environment Variable PATH
+Purpose: PATH is an environment variable that tells the operating system where to look for executable files. When you type a command in the command line, the system searches for the executable file corresponding to that command in the directories listed in the PATH variable.
+Format: PATH is a list of directory paths separated by colons (:). On Windows systems, the separator is a semicolon (;).
+Modifying PATH
+Adding New Directories: If you have installed programs or scripts and want to be able to call them from anywhere directly, you need to add their directories to PATH.
+Example Command: Adding export PATH="${PATH}:/extra/directory/to/search" to a Shell configuration file adds a new directory to the existing PATH list.
+Shell Configuration Files: The location of this configuration file depends on the Shell and operating system you're using. Common files include ~/.bash_profile, ~/.bashrc, ~/.profile, etc. For shells like fish, different files and syntax might be used.
+Viewing PATH Contents
+Command Example: The command you provided tr ':' $'\n' <<< $PATH is used to view the contents of the PATH variable, presenting the paths separated by colons on new lines for easier reading.
+Output Explanation: The output of this command shows the directories included in PATH. For example:
+/home/joseph/.local/share/python/bin: Might be the Python installation directory for the user joseph.
+/bin, /usr/bin, /sbin, /usr/sbin: These are standard Unix/Linux system command storage directories.
+/usr/local/bin, /usr/local/sbin: Usually used for software installed by the system administrator.
+/usr/local/jdk-17/bin: Might be the installation directory for JDK.
+/home/joseph/.local/bin: The personal script or program storage directory for the user joseph.
+Conclusion
+Modifying PATH allows you to more conveniently run programs located in specific directories.
+Different shells and operating systems might have different configuration files and syntax, so pay attention when modifying.
+Using the tr command can help you clearly view all the paths contained in PATH.
+
+Syntax
+
+You've mentioned some basic syntax and command execution logic in Shell scripts, which are core components of building scripts. Let me explain these concepts one by one.
+
+Command Linking
+In Shell scripts, you can link and combine commands in different ways:
+
+Semicolon ;:
+
+Usage: A; B
+Meaning: Run command A, then regardless of A's execution result, run command B.
+Pipe |:
+
+Usage: A | B
+Meaning: Run command A and pass its output as input to command B.
+Logical AND &&:
+
+Usage: A && B
+Meaning: Only run command B if command A executed successfully (i.e., exit status is 0).
+Logical OR ||:
+
+Usage: A || B
+Meaning: Only run command B if command A failed (i.e., exit status is not 0).
+Success and Failure Judgment
+Exit Status: Every executed Shell command returns an exit status, which is a number between 0 to 255.
+How to judge success:
+0 indicates success: Typically, if a command executes successfully, it will return 0.
+Non-0 indicates failure: If a command fails, it usually returns a value greater than 0.
+The ${?} Variable
+Purpose: This special variable ${?} stores the exit status of the last executed command.
+Example Usage:
+do_long_running_command
+test $? -eq 0 && printf "Command succeeded\n"
+Here, test $? -eq 0 checks if the exit status of the last command is 0 (i.e., success), and if so, executes printf "Command succeeded\n".
+Simplified Test Syntax
+Square brackets [] are a simplified form of the test command.
+Example Usage:
+do_long_running_command
+[ $? -eq 0 ] && printf "Command succeeded\n"
+Here, [ $? -eq 0 ] similarly checks the exit status of the last command, and if it's 0, executes the subsequent printf command.
+
+[ $? -eq 0 ]:
+
+The [ is actually an alias for the test command here.
+? is the exit status of the last command.
+-eq 0 checks if this status equals 0.
+] signifies the end of the command.
+It's important that there is a space between each part ([, $?, -eq, 0, ]) for the Shell to correctly parse them as separate arguments.
+[$? -eq 0]:
+
+In this case, the Shell tries to parse [$? as a single string, which is not a valid command or expression.
+Due to the lack of proper space separation, the Shell cannot recognize [ and $? as separate elements.
+This results in a parsing error because the Shell cannot find a command named [$?.
+In short, correct space separation is crucial for the syntax of Shell scripts. They help the Shell understand the boundaries of commands and parameters, thus correctly parsing and executing the script.
+
+Standard Variables
+
+The variables you mentioned are standard variables in Shell scripts, used to access the script's name, the arguments passed to the script, the number of arguments, and all arguments. These variables are very useful when writing scripts, especially when dealing with command-line arguments. Here's a detailed explanation of each variable:
+
+${0} - The Script's Name:
+
+${0} contains the command name or script name that launched the script.
+This is often used to display error messages or usage instructions within the script.
+${1}, ${2}, ${3}, ... - The Arguments Passed to the Script:
+
+These variables represent the first, second, third, etc., arguments passed to the script.
+For example, if a script is called with ./myscript.sh param1 param2, then ${1} would be param1, and ${2} would be param2.
+${#} - The Number of Arguments:
+
+${#} contains the number of arguments passed to the script.
+This is very useful when needing to handle an uncertain number of arguments.
+${@} and ${*} - All Arguments:
+
+Both of these variables represent all the arguments passed to the script.
+${@} and ${} appear similar, but they behave differently when enclosed in double quotes:
+"${@}" treats each argument as a separate quoted string. This is useful when iterating through all arguments.
+"${}" combines all arguments into a single string separated by spaces.
+
+./myscript.sh param1 param2 param3
+Then:
+
+${0} would be ./myscript.sh.
+${1} would be param1.
+${2} would be param2.
+${3} would be param3.
+${#} would be 3.
+Using ${@} or ${*} accesses all three arguments param1 param2 param3, but they behave differently in certain contexts.
+
+Control Flow
+
+If Statements
+if statements are used to execute code based on conditions. In Shell scripts, you can use the test command, square brackets ([ ]), or double square brackets ([[ ]], Bash specific) to check conditions.
+Using the test command:
+if test -x myscript.sh; then
+./myscript.sh
+fi
+Here, test -x myscript.sh checks if myscript.sh has execute permission.
+
+Using square brackets ([ ]):
+if [ -x myscript.sh ]; then
+./myscript.sh
+fi
+Square brackets function the same as the test command. Note that there must be spaces between the expression and the square brackets.
+
+Using double square brackets ([[ ]], Bash specific):
+if [[ -x myscript.sh ]]; then
+./myscript.sh
+fi
+Double square brackets are a Bash extension that offers more features, such as pattern matching and regular expression support.
+
+For Loops
+for loops are used to execute a block of code repeatedly. In Shell scripts, for loops are commonly used for processing lists of files and strings.
+Example:
+for file in *.py; do
+python "${file}"
+done
+Here, the for loop iterates over all files in the current directory with a .py extension. For each such file, it executes the python "${file}" command, where ${file} is the name of the current file.
+Globbing (Wildcards)
+In the for loop example, *.py uses a wildcard (globbing). The Shell expands it to the names of all files matching the pattern in the current directory.
+
+Wildcards like * and ? can be used to match filenames. For example, *.py matches all files with a .py extension.
+
+for n in 1 2 3 4 5; do
+echo -n "${n} "
+done
+1 2 3 4 5
+
+seq 5
+1 2 3 4 5
+
+for n in $(seq 5); do
+echo -n "${n} "
+done
+1 2 3 4 5
+
+seq -s, 5
+1,2,3,4,5
+
+IFS = In Field Separator
+IFS=','
+for n in $(seq -s, 5); do
+echo -n "${n} "
+done
+1 2 3 4 5
+
+Remove everything up to the last / from ${SHELL}
+case "${SHELL##/}" in
+bash) echo "I'm using bash!" ;;
+zsh) echo "Ooh fancy a zsh user!" ;;
+fish) echo "Something's fishy!" ;;
+) echo "Ooh something else!" ;;
+esac
+Parameter expansion: ${SHELL##/} is a parameter expansion expression used to remove everything before and including the last slash / from the $SHELL variable. This is a common way to get the last part of a program or path name. For example, if $SHELL is /bin/bash, then ${SHELL##/} would yield bash.
+
+Case Statement: The case statement chooses a branch to execute based on the value of ${SHELL##*/}:
+
+If the value is bash, it prints I'm using bash!.
+If the value is zsh, it prints Ooh fancy a zsh user!.
+If the value is fish, it prints Something's fishy!.
+
+is a wildcard that matches any other value. In this case, it prints Ooh something else!.
+Ending a Case Statement: esac (case spelled backward) marks the end of the case statement.
+basename and dirname
+
+Basename
+The basename command is used to extract the filename from a full path.
+
+Basic usage:
+basename "/path/to/file"
+This outputs file.
+
+Removing an extension:
+You can also use it to remove the file's extension:
+basename "/path/to/file.txt" ".txt"
+This outputs file.
+
+Dirname
+The dirname command is used to extract the directory part from a full path.
+
+Basic usage:
+dirname "/path/to/file"
+This outputs /path/to.
+Example
+In your example, you showed how to use these commands to process the $SHELL variable and how to use basename in a for loop to handle file extensions.
+echo "${SHELL}"
+echo "${SHELL##/}"
+echo "$(basename "${SHELL}")"
+echo "$(dirname "${SHELL}")"
+Here, basename "${SHELL}" outputs the filename part of the $SHELL path, equivalent to ${SHELL##/}'s effect.
+dirname "${SHELL}" outputs the directory part of the $SHELL path.
+
+In your for loop example:
+for f in *.jpg; do
+convert "${f}" "$(basename "${f}" .jpg).png"
+done
+This loop operates on every .jpg file in the current directory.
+basename "${f}" .jpg removes the .jpg extension from the filename, then the script converts it to .png format.
+
+In your example, you demonstrated how to use pipelines to link multiple commands to perform more complex tasks. Pipelines are a powerful feature in Shell scripts, allowing you to pass the output of one command as input to another command. Here's an explanation of each step in your example:
+
+Using ps and grep to Find the Firefox Process
+Command: ps -A | grep -i firefox
+Explanation:
+ps -A: Lists all running processes.
+|: The pipe symbol passes the output of ps -A to grep -i firefox.
+grep -i firefox: Searches the process list for lines containing "firefox", with -i meaning case-insensitive.
+This command displays all process lines containing "firefox".
+
+Using awk to Refine Output
+Command: ps -A | grep -i firefox | awk '{print $1, $4}'
+Explanation:
+awk '{print $1, $4}': awk is a powerful text processing tool used here to extract the first and fourth columns from each line.
+The result is a more refined process list, only including the process ID and parts of the command line.
+
+The Reason for the grep Process Appearing in the Output
+Phenomenon: You noticed that the output also included the process running the grep command.
+Reason: When the grep command runs, it itself becomes a process containing "firefox", thus also being listed.
+
+Using head to Remove the Last Line
+Command: ps -A | grep -i firefox | awk '{print $1, $4}' | head -n -1
+Explanation:
+head -n -1: This command is typically used to display the first few lines of a file, but here the option -n -1 means displaying all lines except the last one.
+This is done to remove the line containing the grep command, as it is usually the last line in the output.
+
+Counting Process Numbers
+Command: ps -A | grep -i firefox | awk '{print $1, $4}' | head -n -1 | wc -l
+Explanation: This command chain uses wc -l to count the number of matching processes. wc -l counts the number of lines in the input, thus providing the total number of matching processes.
+Different Pipeline Techniques
+Standard Pipeline |: Passes standard output from one command to the standard input of another command.
+Redirect to a File >: Writes standard output to a specified file, overwriting it if it exists.
+Append to a File >>: Appends standard output to a specified file.
+Read from a File <: Takes file content as standard input.
+Use a String as Input <<<: Directly uses a string as standard input to a command.
+Combine Output Streams: For example, 2>&1, combines standard error into the standard output stream.
+Process Substitution Example
+Example: diff <(echo Hello World) <(echo Hello World | tr r R)
+Explanation: This command compares two strings. The first string is "Hello World", and the second string is the result of replacing all 'r's with 'R's. The diff command shows the differences between these two strings.
+Different Shells
+POSIX sh: The most basic shell, best compatibility, used for extreme portability needs.
+Bash: The default shell on Linux systems, feature-rich.
+Zsh: The default shell on MacOS, similar to Bash but with more features.
+Ksh: The default shell on some BSD systems.
+Dash: A simplified version of Bash, used for Linux system booting.
+Busybox sh: A simplified shell for embedded systems.
+Fish, Elvish, Nushell: Modern shells not compatible with POSIX, offering different functionalities and syntax.
+Shell Scripts as Network Services
+inetd: A super-server that can be configured to launch any program when a network connection is made to a specific port.
+Running Network Services: Using inetd, you can make Shell scripts respond to network requests, where standard input (stdin) and output (stdout) are associated with network sockets.
+
+Phony Targets in Makefiles, this is a very useful concept. Phony targets do not represent filenames but are used to organize and simplify specific tasks in the build process. Let me explain in detail.
+
+Concept of Phony Targets
+Purpose: Phony targets are used to execute commands that are not directly related to generating files.
+Characteristic: They are not associated with any files, so even if files of the same name exist, it does not affect the execution of phony targets.
+Common Phony Targets
+all:
+
+Purpose: Typically the first target in a Makefile, used to build all necessary files.
+Example: all: hello coursework.zip flowchart.pdf
+clean:
+
+Purpose: Used to clean up all files generated during the build process, so you can start a new build from a clean state.
+Example: clean: ; rm -f *.o hello coursework.zip flowchart.pdf
+install:
+
+Purpose: Used to install the program or libraries into the appropriate places in the system.
+Example: install: ; cp hello /usr/local/bin/
+Declaring Phony Targets
+Using .PHONY declaration, you can explicitly specify a target as a phony target:
+
+makefile
+Copy code
+.PHONY: all clean install
+This prevents make from mistakenly treating files of the same name as part of these targets.
+
+Example Makefile
+makefile
+Copy code
+.PHONY: all clean
+
+all: hello coursework.zip flowchart.pdf
+
+clean:
+git clean -dfx
+
+hello: hello.c library.o
+cc -o hello hello.c library.o
+
+library.o: library.c
+cc -c -o library.o library.c
+
+coursework.zip: coursework
+zip -r coursework.zip coursework
+
+flowchart.pdf: flowchart.dot
+dot -Tpdf flowchart.dot -O flowchart.pdf
+In this Makefile:
+
+When running make, it executes the all target by default, which depends on hello, coursework.zip, flowchart.pdf.
+Running make clean executes the clean operation, here using the git clean -dfx command to delete all untracked files and directories.
+Summary
+Phony targets are a powerful feature of Makefiles, used to define some common tasks such as building all targets, cleaning generated files, or installing programs. They enhance the flexibility and maintainability of the build process.
+
+Pattern Rules
+
+Pattern rules allow you to define how to build one type of file from another in a more generalized way, instead of writing rules for each individual file. This is an advanced feature in GNU Make, let me explain in detail.
+
+Basics of Pattern Rules
+Pattern rules use % to represent a pattern. For example, %.o: %.c means all .o files depend on a .c file of the same name.
+
+Automatic Variables:
+
+$@ represents the target file.
+$< represents the first dependency.
+These variables are very useful in pattern rules because they change dynamically based on the current target and dependency.
+Example Analysis
+Compiling C files pattern rule:
+
+makefile
+Copy code
+%.o: %.c
+$(CC) $(CFLAGS) -c -o $@ $<
+This rule means to build any .o file (such as library.o), make will look for a .c file of the same name (such as library.c) and compile it using the command in this rule.
+
+Building executable files:
+
+makefile
+Copy code
+%: %.c
+$(CC) $(CFLAGS) -o $@ $<
+This rule is used to build executable files directly from .c files.
+
+Creating a zip file:
+
+makefile
+Copy code
+%.zip: %
+zip -r $@ $<
+Runs the zip command on any file or directory to create a zip file.
+
+Generating PDF from dot files:
+
+makefile
+Copy code
+%.pdf: %.dot
+dot -Tpdf $< -O $@
+Generates a corresponding .pdf file for any .dot file using the dot command.
+
+Automating generation of diagram files:
+
+makefile
+Copy code
+figures=$(patsubst %.dot,%.pdf,$(wildcard *.dot))
+all: hello coursework.zip ${figures}
+Here, the figures variable uses patsubst and wildcard functions to automatically find all .dot files and convert them into a list of .pdf files. The all target depends on these generated .pdf files.
+
+Why Use Pattern Rules
+Simplification: You don't need to write specific rules for each individual file.
+Flexibility: No need to modify the Makefile when adding new files.
+Generality: Can be applied to various types of files and tasks.
+
+Maven Quickstart
+Create a new directory and navigate into it:
+
+bash
+Copy code
+mkdir /tmp/src
+cd /tmp/src
+Generate a new Maven project with the specified parameters:
+
+bash
+Copy code
+mvn archetype:generate \
+-DgroupId=uk.ac.bristol.cs \
+-DartifactId=hello \
+-DarchetypeArtifactId=maven-archetype-quickstart \
+-DinteractiveMode=false
+Maven Quickstart Guide
+Maven is a project management and build automation tool for Java projects. It utilizes a Project Object Model (POM) file named pom.xml to manage the project's build, dependencies, plugins, etc.
+
+Creating a New Project
+In your example, the Maven archetype:generate command is used to create a new project. This command uses several parameters to define the basic properties of the project:
+
+-DgroupId=uk.ac.bristol.cs: The project's group ID, usually the reverse of an organization or company's domain.
+-DartifactId=hello: The project's ID and the name of the created project directory.
+-DarchetypeArtifactId=maven-archetype-quickstart: The template (archetype) used, here it is a quickstart template.
+-DinteractiveMode=false: Non-interactive mode, completes automatically without user interaction.
+Result
+Maven creates the hello project and generates a series of standard directories and files, including:
+
+pom.xml: The project's core configuration file.
+src/main/java: Where the project's source code is placed.
+src/test/java: Where the project's test code is placed.
+target: Where all files generated by Maven during the project build are placed, including compiled .class files, test reports, packaged .jar files, etc.
+Generated Files and Directories
+/tmp/src/hello/pom.xml: The project's Maven configuration file.
+src/main/java/uk/ac/bristol/cs/App.java: An example source code file.
+src/test/java/uk/ac/bristol/cs/AppTest.java: An example test code file.
+Files under the target directory are generated by Maven during the build and test processes. This includes compiled class files (.class), test reports, and the packaged application (.jar files).
+Summary
+Using Maven's archetype:generate command, you can quickly create a Java project with a standard structure, providing a clear and unified starting point for development work. Maven manages the build process, dependencies, tests, etc., making the project's build and maintenance more convenient and efficient.
+pom.xml Structure Analysis
+Project Definition and Namespaces:
+
+xml
+Copy code
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"...>
+This part declares the file as a Maven Project Object Model (POM) and specifies the XML schema used.
+
+Model Version:
+
+xml
+Copy code
+<modelVersion>4.0.0</modelVersion>
+Specifies the Maven POM model version, where 4.0.0 is the most commonly used version.
+
+Project Identifiers:
+
+xml
+Copy code
+<groupId>uk.ac.bristol.cs</groupId>
+<artifactId>hello</artifactId>
+<version>1.0-SNAPSHOT</version>
+Defines the project's group ID (usually reflecting the organization or company's domain), unique project ID (also the base name for generated artifacts like JAR files), and the project's version. SNAPSHOT indicates a development version.
+
+Packaging Method:
+
+xml
+Copy code
+<packaging>jar</packaging>
+Defines how the project is packaged, here as a jar, meaning the project will be packaged into a JAR file.
+
+Project Information:
+The <name> and <url> tags provide basic information about the project.
+
+Dependencies:
+The <dependencies> section lists the project's dependencies. In this example, there is a dependency on JUnit, a framework for Java unit testing, with <scope>test</scope> indicating this dependency is only used for testing.
+
+Maven Dependency Management
+Maven uses the pom.xml file to manage the project's dependencies. Maven automatically downloads and manages these dependencies when you build the project.
+
+In this case, JUnit is defined as a dependency, and Maven ensures that the JUnit library is available during compilation and test execution.
+
+When running the mvn package command, Maven executes a series of build steps to package your project:
+
+Resource Processing: Maven processes the project's resource files (e.g., copying them to the target directory).
+Compilation: Compiles the project's source code.
+Testing: Executes unit tests (using the Surefire plugin).
+Packaging: Packages the compiled code into a JAR file.
+In your output, Maven found no new source or test code to compile as all classes were up to date. It successfully executed the tests and created the project's JAR file.
+
+Common Maven Commands
+
+mvn test: Only runs the tests.
+mvn install: Installs the packaged JAR file into the local Maven repository, useful for sharing libraries across multiple projects.
+mvn clean: Cleans up files generated during the build (e.g., deleting the target directory).
+Creating
+
+bash
+Copy code
+sudo adduser brian
+sudo adduser nigel
+Switching
+
+bash
+Copy code
+su brian
+su nigel
+Adding new users to the users group:
+
+bash
+Copy code
+sudo adduser brian users
+sudo adduser nigel users
+When you run ls -l, you see a detailed list of files, including file permissions, owners, etc.
+For the file message-brian, the initial permissions are -rwxr-xr-x. This indicates:
+
+The file owner (brian) has read, write, and execute permissions (rwx).
+The file's group (brian group) has read and execute permissions (r-x).
+Other users also have read and execute permissions (r-x).
+bash
+Copy code
+chmod u+s message-brian
+After running ls -l again, you see -rwsr-xr-x. The 's' replaces the 'x' in the owner's permissions, indicating the setuid bit has been set.
+
+In Linux systems, the chmod command is used to change the permissions of files or directories. This command can modify permissions for the owner (user), group, and others. Permissions typically include read (r), write (w), and execute (x).
+
+The chmod command has two main usage forms: symbolic notation and numeric notation.
+
+Symbolic Notation
+Symbolic notation uses letters and operators to change permissions. The format is [ugoa][+-=][rwx], where:
+u stands for the owner (user)
+g stands for the group
+o stands for others
+a stands for all users
+adds specified permissions
+removes specified permissions
+= sets exact permissions
+rwx represent read, write, and execute permissions
+Add execute permission to the owner:
+
+bash
+Copy code
+chmod u+x filename
+Add read permission to the group and others:
+
+bash
+Copy code
+chmod go+r filename
+Set the owner to have read and write permissions, and the group and others to have read permission only:
+
+bash
+Copy code
+chmod u=rw,go=r filename
+Use a to represent all users, and use + to add read (r), write (w), and execute (x) permissions:
+
+bash
+Copy code
+chmod a+rwx filename
+Numeric Notation
+Numeric notation uses three digits to set permissions. Each digit is the sum of read (4), write (2), and execute (1) permissions.
+The first digit sets permissions for the owner
+The second digit sets permissions for the group
+The third digit sets permissions for others
+Examples
+Set permissions to 744 (owner read-write-execute (7), group and others read-only (4)):
+bash
+Copy code
+chmod 744 filename
+Set permissions to 760 (owner read-write-execute (7), group read-write (6), others no permissions (0)):
+
+bash
+Copy code
+chmod 760 filename
+Use 777 as the permission code, which means the owner, group, and others all have read (4), write (2), and execute (1) permissions.
+
+bash
+Copy code
+chmod 777 filename
+Changing a file you own:
+
+bash
+Copy code
+chmod 644 myownfile.txt
+No need for sudo here, assuming you are the owner of myownfile.txt.
+
+Changing a system file:
+
+bash
+Copy code
+sudo chmod 644 /etc/systemfile.conf
+sudo is needed in this case because /etc/systemfile.conf is typically not owned by a regular user.
+
+In vagrant:
+
+config
+Copy code
+%users ALL=(ALL) /sbin/reboot
+Indicates that all members of the users group can execute the /sbin/reboot command on all hosts (ALL=(ALL)).
+
+sh
+Copy code
+#!/bin/sh
+
+compile() {
+    local name="$1"
+    [ -z "$name" ] && { echo "No file name provided"; exit 1; }
+    name="${name%.c}"
+    if [ ! -f "${name}.c" ]; then
+        echo "Source file ${name}.c not found"
+        exit 1
+    fi
+    gcc -Wall -std=c11 -g "${name}.c" -o "${name}"
+}
+
+run() {
+    local name="$1"
+    [ -z "$name" ] && { echo "No file name provided"; exit 1; }
+    name="${name%.c}"
+    if [ ! -x "$name" ]; then
+        echo "Executable $name not found"
+        exit 1
+    fi
+    ./"$name"
+}
+
+build() {
+    compile "$1" && run "$1"
+}
+
+case "$1" in
+    compile) compile "$2" ;;
+    run) run "$2" ;;
+    build) build "$2" ;;
+    *) echo "Usage: $0 {compile|run|build} filename" ;;
+esac
+This script provides a command-line interface for compiling, running, and building a C program, automating and simplifying these operations.
+
+In shell scripts, $1, $2, $3, etc., are special variables representing the arguments passed to the script or function. These variables are known as positional parameters.
+
+$1 represents the first argument.
+$2 represents the second argument.
+$3 represents the third argument, and so on.
+When you run a script or function from the command line and pass some arguments, these arguments are assigned to these positional parameter variables. For example, if you run ./myscript.sh arg1 arg2, inside the myscript.sh script, $1 will be arg1, and $2 will be arg2.
+
+In the script mentioned above, $1, $2, etc., are used to get the arguments passed when the script or function is invoked. This allows the script to perform different operations based on user input. For instance, if the script is invoked with ./b compile hello, then inside the script, $1 will be compile, and $2 will be hello. This way, the script can decide which operation to perform based on these arguments.
+
+In shell scripts, -z, -f, and -x are operators used for testing conditions. They are commonly used in if statements or within [ ] (another form of the test command). Here's what each operator means:
+
+-z:
+This operator is used to check if the string length is zero.
+Syntax: -z STRING.
+If the length of STRING is zero (i.e., the string is empty), then it returns true (true).
+For example, [ -z "$myvar" ] checks if the variable myvar is an empty string.
+
+-f:
+This operator is used to check if the file exists and is a regular file.
+Syntax: -f FILE.
+If FILE exists and is a regular file, it returns true.
+For example, [ -f myfile.txt ] checks if myfile.txt exists and is a file.
+
+-x:
+This operator is used to check if the file exists and is executable.
+Syntax: -x FILE.
+If FILE exists and is executable by the current user, it returns true.
+For example, [ -x myscript.sh ] checks if the myscript.sh file exists and is executable.
+
+These test operators are very useful in shell scripts, especially when you need to decide the execution path based on the existence of files or the value of strings. Using these operators can make scripts more robust, capable of handling various situations gracefully, such as missing files, unmet conditions, etc.
+
+In shell scripts, besides -z, -f, and -x, there are many other useful test operators. These operators are commonly used in if statements or within [ ] (which is the same as the test command), allowing for different code paths to be executed based on different conditions. Here are some common test operators:
+
+-e:
+Checks if a file or directory exists.
+For example: [ -e filename ] returns true if filename exists.
+
+-d:
+Checks if the given path exists and is a directory.
+For example: [ -d /my/directory ] returns true if /my/directory is a directory.
+
+-r:
+Checks if a file exists and is readable.
+For example: [ -r file.txt ] returns true if file.txt exists and is readable.
+
+-w:
+Checks if a file exists and is writable.
+For example: [ -w file.txt ] returns true if file.txt exists and is writable.
+
+-s:
+Checks if a file exists and its size is not zero.
+For example: [ -s file.txt ] returns true if file.txt exists and its size is not zero.
+
+-n:
+Checks if the string length is non-zero.
+Opposite of -z, -n returns true when the string is not empty.
+For example: [ -n "$var" ] returns true if the value of variable var is not empty.
+Comparison Operators:
+
+For comparing strings or numbers, operators like =, !=, -lt, -le, -gt, -ge, etc., can be used.
+For example: [ "$a" -lt "$b" ] checks if variable a is less than variable b.
+File Comparison Operators:
+
+-nt checks if one file is newer than another.
+-ot checks if one file is older than another.
+For example: [ file1 -nt file2 ] checks if file1 is newer than file2.
+Using these test operators can enhance the condition-checking capabilities of shell scripts, allowing them to execute different operations based on file attributes, string values, and results of numeric comparisons more accurately. These are essential tools for writing robust and reliable shell scripts.
