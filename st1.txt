@@ -1,0 +1,312 @@
+git checkout: Used to switch to a specified branch or commit.
+git merge: Used to merge the history of one or more branches into the current branch. The merge operation creates a new "merge commit" with two parent commits, each pointing to the last commits of the branches being merged. This is the most common way of merging branches as it preserves the branch history.
+git rebase: Used to apply the changes of one branch onto another. The rebase operation "transplants" commits from one branch onto the top of another branch.
+--no-ff: This option disables "fast-forward" mode. In fast-forward mode, if a branch can be moved directly onto the commit of another branch (i.e., there is no divergence), Git simply moves the pointer forward without creating a new merge commit. Using --no-ff forces Git to create a new merge commit even if the merge could be done in a fast-forward manner.
+
+Alice wishes to merge the branch hotfix into the branch testing.
+
+bash
+Copy code
+git checkout testing; git merge hotfix
+Alice wishes to rebase the branch hotfix into the branch testing.
+
+bash
+Copy code
+git checkout hotfix; git rebase testing
+The purpose of the git clone command is to create a local copy of the entire repository, including all files, branches, and commit history.
+
+If the public key is not correctly set up on GitHub, the error message usually indicates an access permission issue, such as "Permission denied (publickey)".
+
+If the repository does not exist, a message like "remote: Repository not found." or similar may appear.
+
+The error message "ssh: Could not resolve hostname github.com: no address associated with name" indicates that when the Git client tries to connect to GitHub via SSH, it cannot resolve the domain name github.com. This is typically due to network connection issues or DNS resolution problems, indicating that Alice's computer cannot find the address of GitHub's servers over the network.
+
+The git clean command is used to remove untracked files from the working directory. It does not affect the commit history, so it is not suitable for deleting commits.
+
+The git reset main~1 command is used to move the HEAD of the main branch back to the previous commit. This action preserves the changes in the working directory but removes the last commit from the history. git reset has several modes, and without any options, it defaults to --mixed mode, which resets the HEAD to the specified commit and resets the staging area but leaves the working directory unchanged.
+
+The git branch -D main command deletes the main branch itself, which is clearly not what Alice wants. Deleting branches is a dangerous operation, especially for main branches like main, and it's generally not recommended unless you actually want to completely remove the entire branch.
+
+git reset --hard main~3
+
+The git stash command is used to temporarily save changes to your working directory and staging area so that you can have a clean working state.
+
+To view the stash list:
+
+bash
+Copy code
+git stash list
+To apply the most recent stash:
+
+bash
+Copy code
+git stash apply
+If you have multiple stashes, you can specify which stash to apply using stash@{n}, where n is the index in the stash list:
+
+bash
+Copy code
+git stash apply stash@{n}
+To drop the most recent stash:
+
+bash
+Copy code
+git stash drop
+Similarly, if you want to drop a specific stash, you can use:
+
+bash
+Copy code
+git stash drop stash@{n}
+To apply and drop the most recent stash:
+
+bash
+Copy code
+git stash pop
+The .gitignore file is used to tell Git which files or directories should not be tracked or included in the project's version control. It's useful for excluding certain files, such as temporary files, compiled artifacts, or environment-specific configuration files.
+
+plaintext
+Copy code
+# Ignore all .log files
+*.log
+
+# Ignore specific directory
+tmp/
+
+# Ignore all files except a specific one
+!/logs/important.log
+
+# Ignore compiled files
+*.o
+*.a
+
+# Ignore all .pdf files in the build/ directory
+build/*.pdf
+less supports color codes, but you may need to use the -R option to correctly handle color codes, i.e., ls --color=always | less -R).
+
+The ESC[...m sequence is an ANSI color escape code.
+
+ESC[0m resets to the default terminal color.
+ESC[01;34m sets the text color to bright blue, typically used for directories.
+ESC[01;36m sets the text color to bright cyan, possibly used for links.
+
+The more program does not support interpreting these ANSI color escape codes.
+
+Setting setuid: chmod u+s filename
+Setting setgid: chmod g+s filename
+
+4 represents setuid
+2 represents setgid
+1 represents sticky bit
+chmod 2755 filename
+
+If the permissions of the passwd program are changed to -r-xr-xr-x, what will be the user and group when the program is run?
+
+The answer is:
+uid=bob
+gid=users
+
+Because the program will execute with the identity of the user running it, without elevation or change to another user or group's permissions.
+
+-r-sr-sr-x
+uid=root, gid=bin
+
+An inode is a data structure in Unix and Unix-like file systems used to store metadata about a file. Each file or directory has a corresponding inode, which contains important information such as the file's size, permissions, owner, creation time, modification time, access time, and the location of the data blocks on the disk. However, it's important to note that the inode does not contain the file name or the file contents. File names are stored in directory data structures, mapping the file names to the specific inode numbers.
+
+A. -i: This flag makes the ls command display the inode number of each file. For example, running ls -i will list the inode number before each filename.
+
+B. -l: This flag tells ls to list information in long format, including file permissions, owner, size, and last modified date, but excluding the inode number.
+
+C. -n: This flag is similar to -l, but it displays the user ID and group ID of the file's owner and group instead of their names.
+
+D. -z: This option is not a standard option for the ls command in most Unix and Linux systems.
+
+In summary, when main.c is modified, the next time make is run:
+
+main needs to be rebuilt because it directly depends on main.c being modified.
+docs.html needs to be rebuilt because it depends on main.c.
+interface.o and analysis.o might be rebuilt if they are not up-to-date, as they are indirect dependencies of the main target.
+
+The pom.xml file is the core file in a Maven project, standing for Project Object Model. It's an XML file that defines the basic information and configuration details of the project, such as project dependencies, build settings, plugins, project structure, etc. Maven uses this file to manage the project's build, reporting, and documentation.
+
+The main elements of a pom.xml:
+
+project: The root element, containing all other elements.
+modelVersion: Specifies the version of the current POM model. For Maven 2 and 3, this is typically 4.0.0.
+groupId: Defines which group or organization the project belongs to. It's usually a reverse domain name, such as com.example.
+artifactId: The unique identifier of the project. Together with groupId, it uniquely identifies the project.
+version: The version of the project. If the project releases multiple versions, this distinguishes different versions.
+packaging: The packaging type of the project, such as jar, war, etc. The default is jar.
+name: The name of the project.
+url: The URL of the project.
+description: A brief description of the project.
+properties: Defines project properties, such as encoding, compiler version, etc.
+dependencies: Lists the project's dependencies, specifying the libraries and frameworks the project needs.
+build: Build configuration, including plugins, goals, etc.
+plugins: Lists the plugins used during the build process.
+dependencyManagement: Used to manage dependency versions in multi-module projects, ensuring that all modules of the project use the same versions of dependencies.
+modules: Used to aggregate projects, specifying that the project is a multi-module project.
+repositories: Defines from which repositories the project can resolve dependencies.
+Example pom.xml structure:
+
+xml
+Copy code
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.example</groupId>
+    <artifactId>example-project</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <name>Example Project</name>
+    <description>A simple project for demonstration</description>
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+    <dependencies>
+        <!-- Dependency example -->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.13.2</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+    <build>
+        <plugins>
+            <!-- Plugin example -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.8.1</version>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>
+CREATE TABLE answers: Begins the command to create a new table named answers.
+student VARCHAR(8): Defines the student field to store strings of up to 8 characters, expected to hold 8-digit student IDs. Although student IDs are numeric, using VARCHAR allows flexibility for the ID format, such as leading zeros.
+question INTEGER: Defines the question field to store integers, expected to hold 2-digit question IDs.
+answer TEXT: Defines the answer field to store text data, used for storing student answers.
+FOREIGN KEY student REFERENCES student(id): Defines a foreign key constraint, specifying that the student field references the id field of the student table, ensuring that every student ID in the answers table corresponds to a valid ID in the student table.
+FOREIGN KEY question REFERENCES question(id): Defines a foreign key constraint, specifying that the question field references the id field of the question table, ensuring that every question ID in the answers table corresponds to a valid ID in the question table.
+PRIMARY KEY (student, question): Defines a primary key constraint composed of the student and question fields. This means that each row in the table must have a unique combination of student ID and question ID, ensuring that each student's answer to each question is unique.
+
+Selectively translated
+
+Implicit constraints:
+
+NOT NULL, UNIQUE: These constraints are not implicitly implied by foreign key constraints. Foreign key columns can contain NULL values, indicating that the relationship is optional, and the same foreign key value can appear in multiple rows, indicating a many-to-one relationship.
+B. NOT NULL: The column cannot contain NULL values only when the NOT NULL constraint is explicitly added to the foreign key column. The foreign key constraint itself does not enforce this.
+C. UNIQUE: The foreign key column does not need to be unique. A foreign key value can appear in multiple rows, allowing for a many-to-one relationship.
+Therefore, foreign key constraints themselves only ensure referential integrity, without implicitly implying NOT NULL or UNIQUE constraints. If these additional constraints are needed, they must be explicitly defined.
+
+Tracking Program System Calls
+Tracking an existing process:
+If you want to trace a process that is already running, you can use the -p option followed by the process ID (PID):
+strace -p 1234
+This will display all system calls of the process with the ID 1234.
+
+Tracking a new program:
+You can also directly specify a command after strace to start a new process and trace it:
+strace ls -l
+This will start the ls -l command and display all its system calls.
+
+Output Options
+Output to a file:
+Use the -o option to redirect the output to a file instead of printing to stdout:
+strace -o output.txt ls
+This will save the system call output of the ls command to the file output.txt.
+
+Tracking specific system calls:
+Use the -e option to specify that strace should trace only specific system calls. For example, tracing only the open and close system calls:
+strace -e trace=open,close ls
+Setting the maximum string length to trace:
+By default, strace truncates string arguments in the output. You can set the maximum string length using the -s option:
+strace -s 1024 ls
+This sets the maximum string length of string arguments to 1024 characters.
+
+Tracking Child Processes
+Tracking a new program and its child processes:
+Use the -f option to trace all child processes created by the traced process:
+strace -f ./my_program
+This will trace ./my_program and any child processes it creates.
+
+Understanding strace output provides insight into how a program interacts with the operating system. Here's an explanation of key parts of the provided strace output:
+
+execve("/usr/bin/cd", ["cd", "/home/jhl8636"], 0x7fff0476de18 /* 28 vars */) = 0
+execve is a system call used to execute a program. Here, an attempt is made to execute /usr/bin/cd, passing two arguments: cd and /home/jhl8636. The execve returns 0 indicating success.
+open("/usr/bin/cd", O_RDONLY) = 3
+open system call tries to open /usr/bin/cd file for reading only, and returns file descriptor 3. This indicates successful file open.
+read(3, "#!/bin/sh\nbuiltin cd \"$@\"\n", 80) = 26
+read reads from file descriptor 3 (i.e., /usr/bin/cd). It attempts to read 80 bytes and actually reads 26 bytes. The read content is #!/bin/sh\nbuiltin cd \"$@\"\n, indicating a shell script trying to execute the built-in command cd.
+stat("/home/jhl8636", {st_mode=S_IFDIR|0700, st_size=512, ...}) = 0
+stat system call gets the status of the /home/jhl8636 directory. Returns 0 indicating success. It shows the directory's permissions, size, etc.
+Errors and other system calls
+Other open, fstat, close, etc., calls involve loading libraries and configuration files needed by the program. Error messages (like No such file or directory) directly point to the issue, which might be a path error or missing file/directory.
+write(2, "/usr/bin/cd: line 2: cd: /home/jhl8636: No such file or directory\n", 66)
+write system call writes the error message to file descriptor 2 (standard error output). This indicates a failed attempt to change to the /home/jhl8636 directory because it doesn't exist.
+strace provides a window into how a program interacts with the operating system by capturing and displaying all these system calls. Each system call reflects a request from the program to the OS, such as file read/write, memory allocation, querying file status, etc. Analyzing these calls, along with their parameters and return values, can provide deep insights into the behavior of the program, particularly useful for debugging and performance analysis.
+
+Which of the following bash scripts would produce the output string "the easiest question"?
+
+bash
+Copy code
+#!/bin/bash
+input="the hardest question"
+echo $input | sed s/hard/easi/
+Delete (d)
+Deletes the matched lines. For example, delete all empty lines:
+
+bash
+Copy code
+sed '/^$/d' file.txt
+Print (p)
+Prints the matched lines, usually used with the -n option to avoid printing all lines. For example, print lines containing "example":
+
+bash
+Copy code
+sed -n '/example/p' file.txt
+Insert (i)
+Inserts text before the matched lines. For example, insert "New Line" before lines containing "target":
+
+bash
+Copy code
+sed '/target/i New Line' file.txt
+Append (a)
+Appends text after the matched lines. For example, append "New Line" after lines containing "target":
+
+bash
+Copy code
+sed '/target/a New Line' file.txt
+Change (c)
+Replaces the matched lines with new text. For example, replace lines containing "old" with "New Line":
+
+bash
+Copy code
+sed '/old/c New Line' file.txt
+Transform (y)
+The transform command is used for one-to-one character substitution. For example, convert all lowercase letters to uppercase:
+
+bash
+Copy code
+sed 'y/abcdefghijklmnopqrstuvwxyz/ABCDEFGHIJKLMNOPQRSTUVWXYZ/' file.txt
+Range of lines operation
+sed can perform operations within specified line ranges. For example, print lines 2 to 4 of a file:
+
+bash
+Copy code
+sed -n '2,4p' file.txt
+Multiple command execution
+sed can execute multiple commands by using a semicolon (;) or the -e option. For example, delete empty lines and replace "old" with "new":
+
+bash
+Copy code
+sed -e '/^$/d' -e 's/old/new/g' file.txt
+or
+
+bash
+Copy code
+sed '/^$/d; s/old/new/g' file.txt
+These commands provide a basic overview of sed, but its capabilities extend far beyond this. Through learning and practice, you can gain a deeper understanding of how to efficiently manipulate and transform text data using sed.
